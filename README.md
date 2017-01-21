@@ -1,7 +1,7 @@
 # competitive-programming
 Solutions for problems of ICPC regionals, mainly west african national contests and South Africa regional.
 
-## Why this repository ?
+## Why This Repository ?
 At the moment I'm writing these lines, I have participated to two editions of
 the South Africa Regional Contest. The judges did not published explainations
 and solutions to the problems, or at least I did not find them on the web.
