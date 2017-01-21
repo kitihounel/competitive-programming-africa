@@ -13,5 +13,5 @@ and publish them with explainations.
 In a perfect world, we would give all the solutions in C++, because we think it
 is the best language to use in programming contests. But the majority of the
 participants from our country (Benin, if you are interessed) only use C, so when
-it is possible, we also give solutions both in C and C++. Sometimes we give
+it is possible, we also give solutions in both C and C++. Sometimes we give
 solutions in Python and Java too.
