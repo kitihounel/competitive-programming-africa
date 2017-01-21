@@ -39,10 +39,10 @@ int xcompare(const void *p1, const void *p2)
  */
 size_t intersection_length(const char *s1, const char *s2)
 {
-    size_t l = 0:
+    size_t l = 0;
     
     while (*s1 != '\0' && *s2 != '\0') {
-        if(*s1 == *s2) {
+        if (*s1 == *s2) {
             ++l;
             ++s1;
             ++s2;
@@ -64,7 +64,7 @@ int main()
     int  i, n;
     size_t  l1, l2;
 
-    scanf("%d\n");
+    scanf("%d\n", &n);
     for (i = 0; i < n; ++i) {
         scanf("%s\n%s\n", s1, s2);
 
@@ -74,9 +74,9 @@ int main()
         qsort(s1, l1, sizeof(char), compare);
         qsort(s2, l2, sizeof(char), compare);
 
-        printf("Case #%d: %zu\n", l1 + l2 - intersection_length(s1, s2));
+        printf("Cas #%d: %zu\n", i + 1, \
+               l1 + l2 - 2 * intersection_length(s1, s2));
     }
-
 
     return 0;
 }

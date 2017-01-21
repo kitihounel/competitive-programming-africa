@@ -13,13 +13,11 @@
 #include <vector>
 #include <algorithm>
 
-using std::cin;
-using std::cout;
-using std::endl;
+using namespace std;
 
 int solve(int n)
 {
-    std::vector<bool> v(n, true);
+    vector<bool> v(n, true);
 
     for (int i = 2; i <= n; ++i) {
         for (int j = i; j <= n; j += i) {
@@ -27,7 +25,7 @@ int solve(int n)
         }
     }
 
-    return (int) std::count(v.begin(), v.end(), true);
+    return (int) count(v.begin(), v.end(), true);
 }
 
 int main()

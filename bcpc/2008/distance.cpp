@@ -32,7 +32,7 @@ int main()
                                    inter.begin());
         inter.erase(it, inter.end());
 
-        cout << "Case #" << i + 1 << ": " \
+        cout << "Cas #" << i + 1 << ": " << \
                 word1.length() + word2.length() - 2 * inter.length() << endl;
     }
 

@@ -4,7 +4,7 @@
  */
 #include <stdio.h>
 #include <string.h>
-#include <stdlib>
+#include <stdlib.h>
 
 /**
  * Comparison function used to sort strings with qsort.
@@ -33,13 +33,15 @@ int main()
     scanf("%d\n", &n);
     while (n > 0) {
         scanf("%s %s\n", s, t);
+        printf("%s et %s", s, t);
+
         qsort(s, strlen(s), sizeof(char), compare);
         qsort(t, strlen(t), sizeof(char), compare);
+
         if (!strcmp(s, t)) {
-            printf("%s et %s sont des anagrammes l'un pour l'autre\n", s, t);
+            printf(" sont des anagrammes l'un pour l'autre\n");
         } else {
-            printf("%s et %s ne sont pas des anagrammes l'un pour l'autre\n", \
-                   s, t);
+            printf(" ne sont pas des anagrammes l'un pour l'autre\n");
         }
 
         --n;
