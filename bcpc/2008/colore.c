@@ -1,3 +1,10 @@
+/**
+ * Ad hoc problem. Compute the distance between the given color and each of the
+ * primary colors and choose the closest one.
+ *
+ * Note: If we find a primary color which distance gives 0, we choose it and
+ * stop the search.
+ */
 #include <stdio.h>
 
 typedef struct color {

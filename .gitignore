@@ -1,2 +1,8 @@
 # Test directory in each contest edition folder
 tests
+
+# Text files containing hints for solutions
+hints
+
+# TODO files
+TODO
