@@ -45,17 +45,14 @@ int main()
     int  n;
     int  lval, rval, ans;
     int  sign, side, varsign, varside;
-    char equation[65], token, var;
+    char equation[64], token, var;
 
     while(scanf("%d\n", &n) > 0 && n != -1) {
-        // scanf("%[a-z +-]\n", equation);
-        fgets(equation, 65, stdin);
+        scanf("%[a-z0-9 =+-]\n", equation);
         side = lval = rval = 0;
         sign = 1;
 
-        /* We can use scanf to parse the equation but we would deal */
-        /* with spaces. */
-        char *pos = strtok(equation, " \n");
+        char *pos = strtok(equation, " ");
         while (pos != NULL) {
             token = *pos;
 
@@ -90,7 +87,7 @@ int main()
             }
 
             /* We move to the next token. */
-            pos = strtok(NULL, " \n");
+            pos = strtok(NULL, " ");
         }
 
         /* We can finally compute the value of the variable */
