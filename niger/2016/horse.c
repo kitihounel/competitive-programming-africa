@@ -1,3 +1,7 @@
+/**
+ * Solution provided by the Programming Competence Group of IMSP (Institut de
+ * mathématiques et de sciences physiques - Dangbo(Benin)).
+ */
 #include <stdio.h>
 
 int main()
