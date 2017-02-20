@@ -13,7 +13,8 @@
  *
  * Notes:
  * 1. We do not use multiplication to compute the multiples of the input number.
- *    Since we want successive multiples, can can simply use addition.
+ *    Since we want successive multiples, we can simply use addition. And it
+ *    will be faster than multiplication.
  *    However, we provide a function that can be used to compute multiples of
  *    a given number. The code of the function is based on the one used here:
  *    http://www.geeksforgeeks.org/factorial-large-number/.
