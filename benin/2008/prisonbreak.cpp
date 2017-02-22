@@ -6,7 +6,6 @@
  *         is the number of divisors of its index. So if the number of divisors
  *         of a cell is even, the cell will be left closed. But if this number
  *         is odd, the cell will be left opened.
- *
  * Only the first solution is implemented here :-)
  */
 #include <iostream>

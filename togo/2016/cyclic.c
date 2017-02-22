@@ -21,9 +21,6 @@
  * 
  * 2. For more information cyclic numbers, read the wikipedia article:
  *    https://en.wikipedia.org/wiki/Cyclic_number
- *
- * 3. Since the `multiply` function can be used to compute the product of any
- *    two numbers, you can use it to solve the factorial problem of the contest.
  */
 #include <stdio.h>
 #include <string.h>
@@ -134,7 +131,7 @@ int main()
             }
         }
 
-        printf("%s %sest %scyclique\n", number, (cyclic? "": "n'"), (cyclic? "": "pas "));
+        printf("%s is %scyclic\n", number, (cyclic? "": "not "));
         --m;
     }
 }

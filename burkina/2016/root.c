@@ -2,11 +2,12 @@
 
 int main()
 {
-    int n, m;
+    int n, m, root;
     
     while (scanf("%d\n", &n) > 0 && n != 0) {
         m = n % 9;
-        printf("%d\n", m == 0 ? 9: m);
+        root = (m == 0? 9 : m); // WTF?!
+        printf("%d\n", root);
     }
 
     return 0;

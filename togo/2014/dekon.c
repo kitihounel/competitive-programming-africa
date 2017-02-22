@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * Counts the number of occurrences of `needle` in `haystack`.
+ *
+ * This code is not very optimal. It does the job by making successive calls to
+ * to the `strstr` function.
+ */
 int count(const char *haystack, const char *needle)
 {
     int n = 0;
@@ -39,3 +45,4 @@ int main()
 
     return 0;
 }
+

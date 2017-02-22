@@ -1,3 +1,7 @@
+/**
+ * Solution to `Dekon` problem  using regular expressions.
+ * See http://stackoverflow.com/questions/41099513/c-regex-for-overlapping-matches
+ */
 #include <iostream>
 #include <string>
 #include <regex>
