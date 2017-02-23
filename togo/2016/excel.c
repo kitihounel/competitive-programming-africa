@@ -9,7 +9,7 @@ int main()
     while(scanf("R%dC%d\n", &n, &m) > 0 && n > 0) {
 
         /* Get the column by converting m is base 26. */
-        /* Since we the input numbers are numbered from 1, we should sustract */
+        /* Since the input numbers are numbered from 1, we should substract */
         /* 1 from m in each loop. */
         l = 0;
         do {

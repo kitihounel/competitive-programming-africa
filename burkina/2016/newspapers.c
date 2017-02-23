@@ -21,6 +21,7 @@ int main()
         a = n - p + 1;
         b = n - r + 1;
         printf("%d %d %d\n", min(min(a, b), r),
+                             // The following finds the middle element.
                              min(max(a, b), min(max(a, r), max(b, r))),
                              max(max(a, b), r));
     }
