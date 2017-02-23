@@ -1,6 +1,6 @@
 /**
  * The solution is to use depth-first search and to discover all the cells that
- * are reachable from the start position. At tha end of the search, we check
+ * are reachable from the start position. At the end of the search, we check
  * if the destination has been discovered in the search.
  * On the grid shown on the problem statement, rows are numbered from bottom to
  * top, which is not the way that arrays are numbered in C. So we make a little
