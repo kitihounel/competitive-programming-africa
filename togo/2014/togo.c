@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdbool.h>
 
+/**
+ * Search for the word "TOGO" in the rows `matrix`.
+ */
 bool find(int n, int l, char matrix[][l])
 {
     bool found = false;
@@ -34,9 +37,10 @@ int main()
         }
 
         found = find(n, 1001, matrix) || find(n, 1001, transpose);
-        printf("%s\n", (found? "TROUVE": "NON TROUVE"));
+        printf("%sTROUVE\n", found? "": "NON ");
         --p;
     }
 
     return 0;
 }
+

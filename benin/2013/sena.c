@@ -1,3 +1,18 @@
+/**
+ * The solution implemented here is not the best one. There are methods to
+ * evaluate arithmetic expressions by using stacks. See the following link for
+ * a good tutorial:
+ * http://csis.pace.edu/~murthy/ProgrammingProblems/16_Evaluation_of_infix_expressions
+ *
+ * Back to our problem. The expressions are quite simple (only addition
+ * and minus operators), the only difficulty is the parentheses. We proceed by
+ * doing the following operations:
+ *      (1) locate the last left parenthesis and its right parenthesis.
+ *      (2) Evaluate the expression between the parentheses and replace it by
+ *          its value in the original expression.
+ *      (3) Go to (1) until there is no more parentheses in the expression.
+ *      (4) Evaluate the remaining expression and prints its value.
+ */
 #include <stdio.h>
 #include <string.h>
 
