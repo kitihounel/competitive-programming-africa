@@ -8,7 +8,7 @@ int main()
     scanf("%d\n", &p);
     while (p > 0) {
         scanf("%d %d\n", &a, &b);
-        printf("%d %d %d\n", a, b, (a - b) / 2);
+        printf("%d %d %d\n", a, b, ((b - 1) / 2) - (a / 2));
         --p;
     }
 
