@@ -55,4 +55,6 @@ int main()
             printf("%d+%d!=%llu\n", a, b, n);
         }
     }
+
+    return 0;
 }
