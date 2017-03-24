@@ -5,7 +5,7 @@ int main()
 {
     int  count, l;
     int  n, p, r;
-    char s[21], rep[161];
+    char s[21], t[161];
     char ch;
 
     scanf("%d\n", &p);
@@ -16,12 +16,12 @@ int main()
         l = (int) strlen(s);
         for (int i = 0; i < l; ++i) {
             ch = s[i];
-            memset(rep + count, ch, r);
+            memset(t + count, ch, r);
             count += r;
         }
-        *(rep + count) = '\0';
+       *(t + count) = '\0';
 
-        printf("%d %s\n", n, rep);
+        printf("%d %s\n", n, t);
         --p;
     }
 
