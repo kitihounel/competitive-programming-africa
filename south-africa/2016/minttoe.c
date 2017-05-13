@@ -1,7 +1,7 @@
 /**
  * This problem can be solved using backtracking.
  * This code does give correct answers to the problem. It needs to be improved.
- * for each possible move, if there is a possibility for O to win, that is not
+ * For each possible move, if there is a possibility for O to win, that is not
  * good.
  */
 #include <stdio.h>
