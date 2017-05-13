@@ -1,13 +1,15 @@
 /**
  * This problem can be solved using backtracking.
  * This code does give correct answers to the problem. It needs to be improved.
+ * for each possible move, if there is a possibility for O to win, that is not
+ * good.
  */
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
 
 char board[3][3];
-int  answer, freeCellCount;
+int  happyEndingCount, freeCellCount;
 
 /**
  * Check if all marks on the ith row of the board are the same and not dots.
@@ -78,18 +80,27 @@ void solve(int player)
             if (board[i][j] != '.') continue;
             // We mark the cell and decrease the number of free cells.
             // We then check if current move makes the player win or a draw.
-            board[i][j] = player % 2 == 0 ? 'O' : 'X';
+            board[i][j] = (player % 2 == 0 ? 'X' : 'O');
             --freeCellCount;
             if (checkRow(i) || checkCol(j) || checkDiagonals(i, j)) {
                 // Winning move. We stop recursion here. If the current player
                 // is X, that is favourable to us.
-                if (player % 2 == 0) ++answer;
+                fprintf(stderr, "final position found\n");
+                for (int i = 0; i < 3; ++i) {
+                    for (int j = 0; j < 3; ++j) {
+                        fprintf(stderr, "%c", board[i][j]);
+                    }
+                    fprintf(stderr, "\n");
+                }
+                // check if this state is used
+                if (player % 2 == 1) ++happyEndingCount;
             } else {
                 if (freeCellCount > 0) {
                     solve(player + 1);
                 } else {
                     // Game end without a winner. That is favourable to us.
-                    ++answer;
+                    // check if this state is used
+                    // ++happyEndingCount;
                 }
             }
             // As we are using backtracking, we have to undo our current move.
@@ -102,10 +113,10 @@ void solve(int player)
 int main()
 {
     char line[4];
+    int  answer;
 
-    fprintf(stderr, "before shit\n");
     while (scanf("%s\n", line) > 0 && line[0] !=  '-') {
-        freeCellCount = answer = 0;
+        freeCellCount = 0;
         // We read the first row of the board. 
         for (int j = 0; j < 3; ++j) {
             board[0][j] = line[j];
@@ -120,10 +131,44 @@ int main()
             }
         }
         scanf("\n");
-        fprintf(stderr, "dataset read\n");
 
-        solve(0);
-        printf("%d\n", freeCellCount);
+        // For each of the available moves for the X player, we check if all
+        // the possibilities left to the O player lead to a good ending for X.
+        // If any of the left possibilities enable O to win, we know that O
+        // will choose it.
+        answer = 0;
+        if (freeCellCount == 1) {
+            for (int i = 0; i < 3; ++i) {
+                for (int j = 0; j < 3; ++j) {
+                    if (board[i][j] != '.') continue;
+                    board[i][j] = 'X';
+                    answer = checkRow(i) || checkCol(j) || checkDiagonals(i, j);
+                    break;
+                }
+            }
+        } else {
+            for (int i = 0; i < 3; ++i) {
+                for (int j = 0; j < 3; ++j) {
+                    if (board[i][j] != '.') continue;
+                    fprintf(stderr, "putting X at %d %d\n", i, j);
+                    board[i][j] = 'X';
+                    --freeCellCount;
+                    happyEndingCount = 0;
+                    solve(1);
+                    fprintf(stderr, "happy ending count %d\n", happyEndingCount);
+                    if (happyEndingCount == 0) {
+                        ++answer;
+                        fprintf(stderr, "happy ending\n");
+                    } else {
+                        fprintf(stderr, "no happy ending %d\n", happyEndingCount);
+                    }
+                    ++freeCellCount;
+                    board[i][j] = '.';
+                }
+            }
+        }
+
+        printf("%d\n", answer);
     }
 
     return 0;
