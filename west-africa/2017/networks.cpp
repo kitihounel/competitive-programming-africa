@@ -1,11 +1,11 @@
 /**
- * Solution: remove each vertex from the network and count the number of
- * connected components remaining by using a BFS.
+ * Solution: remove each node from the network and count the number of
+ * connected components remaining by using a BFS while there are unvisited
+ * nodes in the remaining network.
  * This solution is not very efficient, but since we have a time limit of 20s,
  * it will do the work.
  */
 #include <iostream>
-#include <stdio.h>
 #include <set>
 #include <deque>
 #include <map>
@@ -24,9 +24,9 @@ int main()
     t = 1;
     while (cin.peek() != 48) {
         vector<vi> adjl(1001);
-        set<int>   vertices;
-        map<int, int> spf;
-        
+        set<int>     vertices;
+        map<int, int>     spf;
+
         while (cin >> u && u != 0 && cin >> v) {
             adjl[u].push_back(v);
             adjl[v].push_back(u);
@@ -36,7 +36,7 @@ int main()
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         for (const auto &u: vertices) {
-            vector<bool> visited(vertices.size() + 1ul, false);
+            vector<bool> visited(1001ul, false);
             set<int> verticesCopy = vertices;
             int subnetCount;
 
@@ -46,10 +46,13 @@ int main()
                 ++subnetCount;
 
                 deque<int> queue;
+                // We start the BFS at the first node of the remaining network.
+                // The nodes are sorted lexicographically, so it is always the
+                // node with the lower number.
                 queue.push_back(*(verticesCopy.begin()));
                 visited[*(verticesCopy.begin())] = true;
                 while (!queue.empty()) {
-                    v = queue.front();
+                    auto v = queue.front();
                     for (const auto &w: adjl[v]) {
                         // We should not use the current vertex u in the BFS.
                         if (w != u && !visited[w]) {
