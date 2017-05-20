@@ -1,8 +1,15 @@
 /**
  * This problem can be solved using backtracking.
- * This code does give correct answers to the problem. It needs to be improved.
- * For each possible move, if there is a possibility for O to win, that is not
- * good.
+ * This code give corrects answers to the problem, but it needs to be
+ * improved.
+ *
+ * Explaination of the logic.
+ * Given the initial state of the board, we test all possible plays for the X
+ * player. If for a play, there is no possibility for O to win, we increment
+ * the count of good moves.
+ *
+ * Note: we let the debug output so that we can follow the evolution of the
+ * game.
  */
 #include <stdio.h>
 #include <string.h>
@@ -92,15 +99,12 @@ void solve(int player)
                     }
                     fprintf(stderr, "\n");
                 }
-                // check if this state is used
                 if (player % 2 == 1) ++happyEndingCount;
             } else {
                 if (freeCellCount > 0) {
                     solve(player + 1);
                 } else {
                     // Game end without a winner. That is favourable to us.
-                    // check if this state is used
-                    // ++happyEndingCount;
                 }
             }
             // As we are using backtracking, we have to undo our current move.
