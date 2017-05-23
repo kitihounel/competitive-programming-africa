@@ -2,7 +2,7 @@
  * Solution found at github.com/saadtaame/acpc/blob/master/2014/A.cc.
  *
  * Note: during the contest, we asked the judges if this problem can be
- * solved using 32-bit integers. He asked yes. But the fact is that it is
+ * solved using 32-bit integers. They asked yes. But the fact is that it is
  * impossible to solve this problem using 32-bit integers.
  * Take an edge case, for example: N = 1000, Y = 1000, N = 70 and M = 100000,
  * declare all variables as 32-bit integers and print the values of the
