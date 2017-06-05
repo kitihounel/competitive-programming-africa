@@ -1,5 +1,5 @@
 /**
- * We will use Erasthostenus sieve to generate all prime numbers up to 1000000.
+ * We will use Erastosthenus sieve to generate all prime numbers up to 1000000.
  * Then we will check each number in the input. If the number is prime and its
  * last digit is 3, we answer yes. If the number is not prime, we will get all
  * its prime factors and check if all of them has 3 as last digit.

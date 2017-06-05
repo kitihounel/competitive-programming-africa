@@ -12,7 +12,7 @@ int main()
     scanf("%d\n", &p);
     for (int i = 0; i < p; ++i) {
         scanf("%lld\n", &n);
-        w = (n * (n + 1) / 2) * ((n * (n + 1) / 2) + (2 * n + 1) + 2) / 2;
+        w = n * (n + 1) * (n + 2) * (n + 3) / 8;
         printf("%d %lld %lld\n", i + 1, n, w);
     }
 
