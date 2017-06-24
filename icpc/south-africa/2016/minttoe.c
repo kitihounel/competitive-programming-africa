@@ -23,8 +23,8 @@ int  happyEndingCount, freeCellCount;
  */
 bool checkRow(int i)
 {
-    return board[i][0] != '.'
-           && board[i][0] == board[i][1] && board[i][0] == board[i][2];
+    return board[i][0] != '.' && board[i][0] == board[i][1]
+        && board[i][0] == board[i][2];
 }
 
 /**
@@ -32,8 +32,8 @@ bool checkRow(int i)
  */
 bool checkCol(int j)
 {
-    return board[0][j] != '.'
-           && board[0][j] == board[1][j] && board[0][j] == board[2][j];
+    return board[0][j] != '.' && board[0][j] == board[1][j]
+        && board[0][j] == board[2][j];
 }
 
 /**
@@ -41,8 +41,8 @@ bool checkCol(int j)
  */
 bool checkFirstDiagonal()
 {
-    return board[2][0] != '.'
-           && board[2][0] == board[1][1] && board[2][0] == board[0][2];
+    return board[2][0] != '.' && board[2][0] == board[1][1]
+        && board[2][0] == board[0][2];
 }
 
 /**
@@ -50,8 +50,8 @@ bool checkFirstDiagonal()
  */
 bool checkSecondDiagonal()
 {
-    return board[0][0] != '.'
-           && board[0][0] == board[1][1] && board[0][0] == board[2][2];
+    return board[0][0] != '.' && board[0][0] == board[1][1]
+        && board[0][0] == board[2][2];
 }
 
 /**
@@ -159,12 +159,13 @@ int main()
                     --freeCellCount;
                     happyEndingCount = 0;
                     solve(1);
-                    fprintf(stderr, "happy ending count %d\n", happyEndingCount);
+                    fprintf(stderr, "happy endings %d\n", happyEndingCount);
                     if (happyEndingCount == 0) {
                         ++answer;
                         fprintf(stderr, "happy ending\n");
                     } else {
-                        fprintf(stderr, "no happy ending %d\n", happyEndingCount);
+                        fprintf(stderr, "no happy ending %d\n",
+                                        happyEndingCount);
                     }
                     ++freeCellCount;
                     board[i][j] = '.';
