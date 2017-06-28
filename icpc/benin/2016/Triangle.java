@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class triangle {
+public class Triangle {
   static int[] rot   = new int[6]; // rot[i] is current rotation of tri[i],
                                    // 0-2 sides.
 
@@ -64,7 +64,7 @@ public class triangle {
          
   public static void main(String[] args) {
     String FILE = "triangle";
-    ACMIO in = new ACMIO(FILE + ".in");
+    AcmIO in = new AcmIO(FILE + ".in");
     PrintWriter out = null;
     try {
       out = new PrintWriter(new BufferedWriter(new FileWriter(FILE + ".out"))); 

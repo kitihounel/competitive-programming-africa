@@ -1,6 +1,6 @@
 /**
  * This solution is heavily based on the official solution which can be found
- * in the file triangle.java. We just rewrite it in C without global vars.
+ * in the file Triangle.java. We just rewrite it in C without global vars.
  * But there a few changes.
  *  - This solution is more generic and can work with boards of different size,
  *    i.e. we are no more limited to 6 triangles.
