@@ -22,7 +22,7 @@ C++ programs with the option -std=c++11.
 
 For Python, we use Python 3.
 
-### Update about programming languages
+### Update about programming languages (2017/07/19)
 Python is now our main programming language. Solutions will be written in both
 C++ and Python, but when we think that a solution will be tricky to write in
 C++, we will only use Python. 
