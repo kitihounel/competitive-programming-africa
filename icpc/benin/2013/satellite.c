@@ -1,8 +1,7 @@
 /**
  * For explainations about the solution implemented here, read the following
  * dicussion on developpez.net:
- * https://developpez.net/forums/d1623320/general-developpement/
- * algorithme-mathematiques/mathematiques/visibilite-d-satellite-point-terre/
+ * https://developpez.net/forums/d1623320/general-developpement/algorithme-mathematiques/mathematiques/visibilite-d-satellite-point-terre/
  */
 #include <stdio.h>
 #include <math.h>
