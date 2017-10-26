@@ -28,7 +28,7 @@ Python is now our main programming language. Solutions will be written in both
 C++ and Python, but when we think that a solution will be tricky to write in
 C++, we will only use Python. 
 
-# IMPORTANT (2017/10/24)
+## Important (2017/10/24)
 It seems that there was an update on ICPC Live Archive platform, since our
 submissions are now accepted. But sadly, a lot of our programs written in C are
 not accepted because of compilation errors (They did not activate C11 support

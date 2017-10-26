@@ -1,6 +1,8 @@
-#include <stdio.h>
+#include <iostream>
+#include <cstdio>
 
-typedef long long int i64;
+using namespace std;
+using i64 = long long int;
 
 i64 gcd(i64 a, i64 b)
 {

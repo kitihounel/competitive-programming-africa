@@ -11,9 +11,11 @@
  * Note: we let the debug output so that we can follow the evolution of the
  * game.
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdbool.h>
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+
+using namespace std;
 
 char board[3][3];
 int  happyEndingCount, freeCellCount;
@@ -63,15 +65,14 @@ bool checkDiagonals(int x, int y)
 {
     bool b;
 
-    if (x == 1 && y == 1) {
+    if (x == 1 && y == 1)
          b = checkFirstDiagonal() || checkSecondDiagonal();
-    } else if (x + y == 2) {
+    else if (x + y == 2)
         b = checkFirstDiagonal();
-    } else if (x - y == 0) {
+    else if (x - y == 0)
         b = checkSecondDiagonal();
-    } else {
+    else
         b = false;
-    }
 
     return b;
 }
@@ -81,31 +82,33 @@ bool checkDiagonals(int x, int y)
  */
 void solve(int player)
 {
-    fprintf(stderr, "player %d\n", player);
+    // fprintf(stderr, "player %d\n", player);
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
-            if (board[i][j] != '.') continue;
+
+            if (board[i][j] != '.')
+                continue;
+
             // We mark the cell and decrease the number of free cells.
             // We then check if current move makes the player win or a draw.
             board[i][j] = (player % 2 == 0 ? 'X' : 'O');
             --freeCellCount;
+
             if (checkRow(i) || checkCol(j) || checkDiagonals(i, j)) {
                 // Winning move. We stop recursion here. If the current player
                 // is X, that is favourable to us.
-                fprintf(stderr, "final position found\n");
-                for (int i = 0; i < 3; ++i) {
-                    for (int j = 0; j < 3; ++j) {
-                        fprintf(stderr, "%c", board[i][j]);
-                    }
-                    fprintf(stderr, "\n");
-                }
-                if (player % 2 == 1) ++happyEndingCount;
+                // fprintf(stderr, "final position found\n");
+                // for (int i = 0; i < 3; ++i) {
+                //    for (int j = 0; j < 3; ++j)
+                //        fprintf(stderr, "%c", board[i][j]);
+                //    fprintf(stderr, "\n");
+                // }
+                if (player % 2 == 1)
+                    ++happyEndingCount;
+            } else if (freeCellCount > 0) {
+                solve(player + 1);
             } else {
-                if (freeCellCount > 0) {
-                    solve(player + 1);
-                } else {
-                    // Game end without a winner. That is favourable to us.
-                }
+                // Game end without a winner. That is favourable to us.
             }
             // As we are using backtracking, we have to undo our current move.
             board[i][j] = '.';
@@ -124,14 +127,16 @@ int main()
         // We read the first row of the board. 
         for (int j = 0; j < 3; ++j) {
             board[0][j] = line[j];
-            if (line[j] == '.') ++freeCellCount;
+            if (line[j] == '.')
+                ++freeCellCount;
         }
         // Now we read the two remaining rows.
         for (int i = 1; i < 3; ++i) {
             scanf("%s\n", line);
             for (int j = 0; j < 3; ++j) {
                 board[i][j] = line[j];
-                if (line[j] == '.') ++freeCellCount;
+                if (line[j] == '.')
+                    ++freeCellCount;
             }
         }
         scanf("\n");
@@ -154,18 +159,17 @@ int main()
             for (int i = 0; i < 3; ++i) {
                 for (int j = 0; j < 3; ++j) {
                     if (board[i][j] != '.') continue;
-                    fprintf(stderr, "putting X at %d %d\n", i, j);
+                    // fprintf(stderr, "putting X at %d %d\n", i, j);
                     board[i][j] = 'X';
                     --freeCellCount;
                     happyEndingCount = 0;
                     solve(1);
-                    fprintf(stderr, "happy endings %d\n", happyEndingCount);
+                    // fprintf(stderr, "happy endings %d\n", happyEndingCount);
                     if (happyEndingCount == 0) {
                         ++answer;
-                        fprintf(stderr, "happy ending\n");
+                        // fprintf(stderr, "happy ending\n");
                     } else {
-                        fprintf(stderr, "no happy ending %d\n",
-                                        happyEndingCount);
+                        // fprintf(stderr, "no happy ending %d\n", happyEndingCount);
                     }
                     ++freeCellCount;
                     board[i][j] = '.';

@@ -1,6 +1,6 @@
-from sys         import stdin
+from sys import stdin, setrecursionlimit
 from collections import defaultdict
-from heapq       import heappop, heappush
+from heapq import heappop, heappush
 
 class Node:
     def __init__(self, state, d):
@@ -52,6 +52,7 @@ def shortest_path(start):
             heappush(p, Node(v, u.d + 1))
     return d
 
+setrecursionlimit(20000)
 for line in stdin:
     data = [int(token) for token in line.split()]
     n = data[0]
