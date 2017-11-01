@@ -1,3 +1,5 @@
+"""This program got `Runtime Error` on ICPC Live Archive."""
+
 from sys import stdin, setrecursionlimit
 from collections import defaultdict
 from heapq import heappop, heappush

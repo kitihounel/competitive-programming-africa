@@ -5,6 +5,8 @@
  * Undergraduate Journal of Mathematical Modeling: One + Two. The article is
  * contained in the file `article.pdf`. We advice to read the article before
  * diving in the code below.
+ *
+ * Note: This program got `Wrong Answer` on ICPC Live Archive.
  */
 #include <iostream>
 #include <cstdio>

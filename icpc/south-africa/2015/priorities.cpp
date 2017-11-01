@@ -13,7 +13,7 @@ int main()
     bool sorted;
     vector<int> v;
 
-    /* We reserve space for hundred elements to avoid reallocation. */
+    // We reserve space for hundred elements to avoid reallocation.
     v.reserve(100);
     while (cin >> n && n > 0) {
         for (int i = 0; i < n; ++i) {

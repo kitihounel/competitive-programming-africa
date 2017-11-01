@@ -9,8 +9,7 @@
  * Notes:
  *  1. This program is based on the algorithm given in the Wikipedia's article.
  *  2. During the contest, the time limit for this problem was set to 10s. But
- *     on the ICPC Live Archive, the time limit is 3s. All our submissions got
- *     TLE.
+ *     on the ICPC Live Archive, the time limit is 3s. Our submissions got TLE.
  */
 #include <iostream>
 #include <cstdio>
@@ -31,13 +30,11 @@ int editDistance(const string &s, const string &t)
     
     insertionCost = deletionCost = 2;
 
-    for (int i = 0; i <= m; ++i) {
+    for (int i = 0; i <= m; ++i)
         dist[i][0] = i * deletionCost;
-    }
 
-    for (int j = 0; j <= n; ++j) {
+        for (int j = 0; j <= n; ++j)
         dist[0][j] = j * insertionCost;
-    }
 
     for (int j = 1; j <= n; ++j) {
         for (int i = 1; i <= m; ++i) {

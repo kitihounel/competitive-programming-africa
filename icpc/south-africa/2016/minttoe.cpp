@@ -8,8 +8,9 @@
  * player. If for a play, there is no possibility for O to win, we increment
  * the count of good moves.
  *
- * Note: we let the debug output so that we can follow the evolution of the
- * game.
+ * Note:
+ * 1. We let the debug output so that we can follow the evolution of the game.
+ * 2. This program got `Wrong Answer` on ICPC Live Archive.
  */
 #include <iostream>
 #include <cstdio>

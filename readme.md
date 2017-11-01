@@ -35,3 +35,6 @@ not accepted because of compilation errors (They did not activate C11 support
 for the compiler). So we will give all solutions for South Africa contest in
 C++ and Python. But for West Africa contests, we will give solutions in C when
 it is possible.
+
+Also, if a program is not judged as *Accepted* on ICPC Live Archive, we mention
+it in the comments at the beginning of the source code.

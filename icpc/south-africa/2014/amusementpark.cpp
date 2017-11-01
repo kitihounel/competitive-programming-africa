@@ -1,47 +1,71 @@
 /**
- * Simulation problem.
- * The solution is to simulate the arrival of the customers at the rides and
- * to count the number of free rides that will be given per customer.
- * Note that there will be at least N free rides given.
+ * About the variable `next`.
+ * There is a standard function in C++, declared in the `iterator` header,
+ * which is named `next`. But since we are not inclusing that header, there is
+ * no problem. We write this line to warn you that using `next` as a variable
+ * name in C++ is not a good idea.
  */
 #include <iostream>
 #include <vector>
+#include <numeric>
 
 using namespace std;
+using i64 = long long int;
 
 int main()
 {
     int  a, n;
-    long long int freeRideCount;
-    vector<int> v;
-
-    v.reserve(150000ul);
+    vector<int> next;
 
     while (cin >> n && n != -1) {
+        vector<bool> visited(n, false);
+        vector<bool> computed(n, false);
+        vector<i64>  tripLengths(n, 0ll);
 
         for (int j = 0; j < n; ++j) {
             cin >> a;
-            v.push_back(a - 1);
+            next.push_back(a - 1);
         }
 
-        freeRideCount = n;
         for (int j = 0; j < n; ++j) {
-            vector<bool> takenRides(n, false);
-            int currentRide, nextRide;
+            if (computed[j])
+                continue;
 
+            vector<int>  q;
+            int currentRide;
+            i64 rideCount = 0ll;
+
+            fill(visited.begin(), visited.end(), false);
             currentRide = j;
-            nextRide = v[currentRide];
-            takenRides[currentRide] = true;
-            while (!takenRides[nextRide]) {
-                ++freeRideCount;
-                takenRides[nextRide] = true;
-                currentRide = nextRide;
-                nextRide = v[currentRide];
+            while (!visited[currentRide]) {
+                if (computed[currentRide]) {
+                    rideCount += tripLengths[currentRide];
+                    break;
+                }
+
+                ++rideCount;
+                visited[currentRide] = true;
+                q.push_back(currentRide);
+                currentRide = next[currentRide];
+            }
+
+            int k = 0;
+            while (q[k] != currentRide && k < (int) q.size()) {
+                computed[q[k]] = true;
+                tripLengths[q[k]] = rideCount - (i64) k;
+                ++k;
+            }
+
+            i64 cycleLength = rideCount - (i64) k;
+            while (k < (int) q.size()) {
+                computed[q[k]] = true;
+                tripLengths[q[k]] = cycleLength;
+                ++k;
             }
         }
 
-        cout << freeRideCount << endl;
-        v.clear();
+        cout << accumulate(tripLengths.begin(), tripLengths.end(), 0ll) << endl;
+        next.clear();
     }
 
     return 0;

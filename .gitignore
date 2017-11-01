@@ -9,3 +9,6 @@ todo
 
 # Folder containing source files of solutions sketches
 explainations
+
+# Stupid VS Code Folder
+.vscode

@@ -17,7 +17,7 @@
  *
  * Notes:
  * 1. To cite Per Austrin, the code below may be generally difficult to read.
- * 2. I am not very sure the solution implemented here is correct.
+ * 2. This program got `Wrong Answer` on ICPC Live Archive.
  */
 #include <iostream>
 #include <vector>
