@@ -4,7 +4,7 @@
  * The solution implemented here is described in an article of the
  * Undergraduate Journal of Mathematical Modeling: One + Two. The article is
  * contained in the file `article.pdf`. We advice to read the article before
- * diving in the code below.
+ * looking in the code below.
  *
  * Note: This program got `Wrong Answer` on ICPC Live Archive.
  */
@@ -39,9 +39,9 @@ long double newtonRaphson(long double d, long double p)
 
     /* In the document where we found the solution, a is set to 20 ft.  */
     /* 1 ft = 0.304 m and 20 ft = 6.08 m. But we choose to set a = 10.  */
-    a = 10.0l;
+    a = 12.5l;
     eps = 1.0l;
-    while(eps > 0.00001l) {
+    while(eps > 0.000001l) {
         b = a - f(a, d, p) / g(a, d);
         eps = fabs(a - b);
         a = b;
@@ -59,10 +59,10 @@ int main()
 {
     long double a, d, l, p;
 
-    while (scanf("%Lf %Lf", &p, &d) == 2) {
+    cout.precision(3);
+    while (cin >> p >> d) {
         a = newtonRaphson(d, p);
         l = length(a, d);
-        cout.precision(3);
         cout << fixed << l << endl;
     }
 

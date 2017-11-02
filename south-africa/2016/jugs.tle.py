@@ -1,7 +1,5 @@
-"""This program got `Runtime Error` on ICPC Live Archive."""
-
-from sys import stdin, setrecursionlimit
-from collections import defaultdict
+from sys import stdin
+from collections import defaultdict, deque
 from heapq import heappop, heappush
 
 class Node:
@@ -12,8 +10,8 @@ class Node:
         return self.d < other.d
 
 def generate(s: tuple):
-    global capacities, goal, n, possible, states
-    states.add(s)
+    global capacities, goal, n, possible, queue, states
+
     for i, c in enumerate(s):
         # If the jug is not empty, empty it.
         if c != 0:
@@ -21,14 +19,18 @@ def generate(s: tuple):
             possible = possible or goal in t
             neighbors[s].add(t)
             if t not in states:
-                generate(t)
+                states.add(t)
+                queue.append(t)
+
         # If the jug is not full, fill it.
         if c != capacities[i]:
             t = tuple(s[k] if k != i else capacities[i] for k in range(n))
             possible = possible or goal in t
             neighbors[s].add(t)
             if t not in states:
-                generate(t)
+                states.add(t)
+                queue.append(t)
+
         # Pour water in other jugs.
         for j in range(n):
             if j == i:
@@ -38,7 +40,8 @@ def generate(s: tuple):
             possible = possible or goal in t
             neighbors[s].add(t)
             if t not in states:
-                generate(t)
+                states.add(t)
+                queue.append(t)
 
 def shortest_path(start):
     global goal
@@ -54,7 +57,6 @@ def shortest_path(start):
             heappush(p, Node(v, u.d + 1))
     return d
 
-setrecursionlimit(20000)
 for line in stdin:
     data = [int(token) for token in line.split()]
     n = data[0]
@@ -65,7 +67,10 @@ for line in stdin:
         d = -1
     else:
         neighbors, states, possible = defaultdict(set), set(), False
-        s = tuple([0]) * n
-        generate(s)
-        d = shortest_path(s) if possible else -1
+        queue, start = deque(), (0,) * n
+        states.add(start)
+        queue.append(start)
+        while queue:
+            generate(queue.popleft())
+        d = shortest_path(start) if possible else -1
     print(d)

@@ -3,68 +3,64 @@
  *
  * You can find an introduction at:
  * https://en.wikipedia.org/wiki/Levenshtein_distance
+ *
  * A very good explaination of the algorithm is given at:
  * http://blog.ce-se.de/2010/10/11/levenshtein-distance-edit-distance-easily-explained/
  *
- * Notes:
- *  1. This program is based on the algorithm given in the Wikipedia's article.
- *  2. During the contest, the time limit for this problem was set to 10s. But
- *     on the ICPC Live Archive, the time limit is 3s. Our submissions got TLE.
+ * This program is based on the algorithm given in the Wikipedia's article.
  */
 #include <iostream>
-#include <cstdio>
-#include <cstring>
 #include <cctype>
 #include <algorithm>
 #include <vector>
 
 using namespace std;
+using vi = vector<int>;
 
-int editDistance(const string &s, const string &t)
+const int deletionCost  = 2;
+const int insertionCost = 2;
+
+int editDistance(const string &src, const string &dst)
 {
-    int deletionCost, insertionCost, substitutionCost;
-    int m = (int) s.length();
-    int n = (int) t.length();
-    // Input strings can be 10000 characters long, we can't use arrays.
-    vector<vector<int>> dist(m + 1, vector<int>(n + 1, 0));
+    int substitutionCost;
+    int m = (int) src.length();
+    int n = (int) dst.length();
+    vi  previousRow(n + 1, 0);
+    vi  currentRow(n + 1,  0);
     
-    insertionCost = deletionCost = 2;
+    for (int j = 0; j <= n; ++j)
+        previousRow[j] = j * insertionCost;
 
-    for (int i = 0; i <= m; ++i)
-        dist[i][0] = i * deletionCost;
+    for (int i = 1; i <= m; ++i) {
+        currentRow[0] = i * deletionCost;
 
-        for (int j = 0; j <= n; ++j)
-        dist[0][j] = j * insertionCost;
+        for (int j = 1; j <= n; ++j) {
 
-    for (int j = 1; j <= n; ++j) {
-        for (int i = 1; i <= m; ++i) {
-
-            if (s[i-1] == t[j-1])
-              substitutionCost = 0;
-            else if (tolower(s[i-1]) == tolower(t[j-1]))
+            if (src[i-1] == dst[j-1])
+                substitutionCost = 0;
+            else if (tolower(src[i-1]) == tolower(dst[j-1]))
                 substitutionCost = 1;
             else
                 substitutionCost = 2;
 
-            int a = dist[i-1][j] + deletionCost;
-            int b = dist[i][j-1] + insertionCost;
-            int c = dist[i-1][j-1] + substitutionCost;
+            int a = currentRow[j-1]  + deletionCost;
+            int b = previousRow[j]   + insertionCost;
+            int c = previousRow[j-1] + substitutionCost;
 
-            dist[i][j] = min(min(a, b), c);
+            currentRow[j] = min(min(a, b), c);
         }
+        swap(previousRow, currentRow);
     }
 
-    return dist[m][n];
+    return previousRow[n];
 }
 
 int main()
 {
-    string s, t;
-    int d;
+    string src, dst;
 
-    while (cin >> s >> t) {
-        cout << editDistance(s, t) << endl;
-    }
+    while (cin >> src >> dst)
+        cout << editDistance(src, dst) << endl;
 
     return 0;
 }
