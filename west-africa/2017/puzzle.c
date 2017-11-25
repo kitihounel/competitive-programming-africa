@@ -75,8 +75,10 @@ int checkPuzzle(PUZZLE p)
 void push(PUZZLE p, LIGHT l)
 {
     LIGHT neighbors[] = {
-        { i: l.i - 1, j: l.j },     { i: l.i + 1, j: l.j },
-        { i: l.i,     j: l.j - 1 }, { i: l.i,     j: l.j + 1 }
+        { i: l.i - 1, j: l.j     },
+        { i: l.i + 1, j: l.j     },
+        { i: l.i,     j: l.j - 1 },
+        { i: l.i,     j: l.j + 1 }
     };
 
     p[l.i][l.j] = 1 - p[l.i][l.j];
@@ -98,7 +100,7 @@ void pushLights(PUZZLE p, PUZZLE actions)
     for (int i = 0; i < HEIGHT; ++i) {
         for (int j = 0; j < WIDTH; ++j) {
             if (actions[i][j] == 1) {
-                push(p, (LIGHT) {i: i, j: j});
+                push(p, (LIGHT) { i: i, j: j });
             }
         }
     }

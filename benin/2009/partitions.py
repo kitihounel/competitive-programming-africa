@@ -1,4 +1,4 @@
-"""Solution to problem Recursively Palindromic Partitions, from Benin 2009.
+"""Solution to problem Recursively Palindromic Partitions, from Benin 2009
 
 This script is just the Python version of the official solution provided in C.
 The explainations are also based on the official ones. We just describe the

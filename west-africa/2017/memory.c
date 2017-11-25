@@ -8,7 +8,6 @@
 #include <string.h>
 #include <ctype.h>
 
-
 /**
  * Replace all occurences of 'name' (whatever the case) that appear in 'str' by
  * 'name'.

@@ -3,9 +3,11 @@
  * The algorithm implemented here tries to solve a puzzle by trying all
  * combinations of lights. Combinations are obtained by using the set bits in
  * numbers from 1 to (2^30 - 1).
+ *
  * For example, this program takes 1m36s on my computer to solve the first
  * puzzle (in the sample input) which solution is given by the a number between
  * 36 * 10^6 and 37 * 10^6.
+ *
  * If you really want to use this program, launch it in a terminal and go take
  * a lunch with your (boy|girl)friend. It will still be running when you will
  * come back.
@@ -57,8 +59,10 @@ bool checkPuzzle()
 void push(light l)
 {
     light neighbors[] = {
-        {i: l.i - 1, j: l.j}, {i: l.i + 1, j: l.j},
-        {i: l.i, j: l.j - 1}, {i: l.i, j: l.j + 1}
+        { i: l.i - 1,    j: l.j },
+        { i: l.i + 1,    j: l.j },
+        { i: l.i,        j: l.j - 1 },
+        { i: l.i,        j: l.j + 1 }
     };
 
     puzzle[l.i][l.j] = !puzzle[l.i][l.j];

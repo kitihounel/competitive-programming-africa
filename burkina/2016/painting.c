@@ -2,6 +2,14 @@
 #include <stdlib.h>
 
 /**
+ * Return the maximum of two integers.
+ */
+int max(int a, int b)
+{
+    return (a > b? a: b);
+}
+
+/**
  * Find the maximum element in an array.
  */
 int maxElement(int n, int a[n])
@@ -10,9 +18,7 @@ int maxElement(int n, int a[n])
 
     m = a[0];
     for (int i = 1; i < n; ++i) {
-        if (a[i] > m) {
-            m = a[i];
-        }
+        m = max(m, a[i]);
     }
 
     return m;

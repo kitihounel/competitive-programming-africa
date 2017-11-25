@@ -1,5 +1,5 @@
 /**
- * The problem simply ask to convert a given time in binary.
+ * The problem simply asks to convert a given time in binary.
  *
  * Notes:
  *  1. The vertical representation is just the transpose of the horizontal

@@ -39,7 +39,11 @@ int main()
             for (int i = 0; i < k; ++i) {
                 r = x + i * s;
                 c = y + i * t;
-                ++rows[r]; ++cols[c]; ++ascd[r + c]; ++desc[r - c];
+
+                ++rows[r];
+                ++cols[c];
+                ++ascd[r + c];
+                ++desc[r - c];
             }
             --g;
         }

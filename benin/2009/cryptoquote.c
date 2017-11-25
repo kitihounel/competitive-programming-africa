@@ -1,8 +1,7 @@
 /**
- * The only `difficulty` (note the quotes) in this problem is to find
- * the substitute of a char appearing in the encoded message. Given the mapping
- * array, the index `i` of the substitute of a character `c` is simply:
- *              i = c - 'A'
+ * The only `difficulty` in this problem is to find the substitute of a char
+ * appearing in the encoded message. Given the mapping array, the index `i` of
+ * the substitute of a character `c` is simply: i = c - 'A'
  */
 #include <stdio.h>
 #include <string.h>

@@ -14,16 +14,14 @@ int min(int a, int b)
 int main()
 {
     int n, p;
-    int a, b, r;
+    int a, b, m, r;
 
     while (scanf("%d %d\n", &n, &p) == 2) {
         r = p + (p % 2 == 0? -1: 1);
         a = n - p + 1;
         b = n - r + 1;
-        printf("%d %d %d\n", min(min(a, b), r),
-                             // The following finds the middle element.
-                             min(max(a, b), min(max(a, r), max(b, r))),
-                             max(max(a, b), r));
+        m = min(max(a, b), min(max(a, r), max(b, r))); // Middle element
+        printf("%d %d %d\n", min(min(a, b), r), m, max(max(a, b), r));
     }
 
     return 0;

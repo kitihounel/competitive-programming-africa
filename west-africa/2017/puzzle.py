@@ -1,11 +1,11 @@
-"""\
-Solution to Lights Out problem.
+"""Solution to Lights Out problem
 
 If you want to learn more about the Lights Out puzzle, you can consult the
 following pages:
   * en.wikipedia.org/wiki/Lights_Out_(game)
   * gaming.stackexchange.com/questions/11123/strategy-for-solving-lights-out-puzzle
   * keithschwarz.com/interesting/code/?dir=lights-out
+
 The solution implemented here use the "light chase" method mentioned in the
 stackexchange discussion. You should also consult keithschwarz.com. It contains
 a lot of interesting stuffs.

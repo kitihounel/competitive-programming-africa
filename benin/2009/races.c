@@ -31,20 +31,24 @@ int getTeamIndex(const char *teamName)
 {
     int index = -1;
 
-    for (int i = 0; i < teamCount && index == -1; ++i)
-        if (!strcmp(teamName, teams[i].name))
+    for (int i = 0; i < teamCount && index == -1; ++i) {
+        if (!strcmp(teamName, teams[i].name)) {
             index = i;
+        }
+    }
 
     return index;
 }
 
-int getPilotIndex(const char *firstName, const char *lastName)
+int getPilotIndex(const char *fName, const char *lName)
 {
     int index = -1;
 
-    for (int i = 0; i < pilotCount && index == -1; ++i)
-        if (!strcmp(firstName, pilots[i].firstName)  && !strcmp(lastName, pilots[i].lastName))
+    for (int i = 0; i < pilotCount && index == -1; ++i) {
+        if (!strcmp(fName, pilots[i].firstName) && !strcmp(lName, pilots[i].lastName)) {
             index = i;
+        }
+    }
 
     return index;
 }
@@ -61,9 +65,12 @@ void addPilot(const char *firstName, const char *lastName)
     strcpy(pilots[pilotCount].firstName, firstName);
     strcpy(pilots[pilotCount].lastName,  lastName);
     sprintf(pilots[pilotCount].fullName, "%s %s", firstName, lastName);
-    for (int i = 0; i < 8; ++i)
-        pilots[pilotCount].ranks[i] =  0;
-    pilots[pilotCount].score        =  0;
+
+    for (int i = 0; i < 8; ++i) {
+        pilots[pilotCount].ranks[i] = 0;
+    }
+
+    pilots[pilotCount].score = 0;
     pilotCount += 1;
 }
 

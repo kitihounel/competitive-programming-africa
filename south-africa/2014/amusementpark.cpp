@@ -1,9 +1,6 @@
 /**
- * About the variable `next`.
- * There is a standard function in C++, declared in the `iterator` header,
- * which is named `next`. But since we are not inclusing that header, there is
- * no problem. We write this line to warn you that using `next` as a variable
- * name in C++ is not a good idea.
+ * I don't know how to explain how I solved this problem.
+ * So explaination will come later.
  */
 #include <iostream>
 #include <vector>
