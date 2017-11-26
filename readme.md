@@ -12,7 +12,7 @@ So we decided to solve as many problems as we can and publish solutions with
 explainations.
 
 ## Programming Languages Used
-Solutions with be given in C, C++, Java and Python. Python and C++ are our
+Solutions will be given in C, C++, Java and Python. Python and C++ are our
 favourite languages, so most of the time, solutions will be given in those
 languages.
 
@@ -22,10 +22,10 @@ C++ programs with the option -std=c++11.
 For Python, we use Python 3.
 
 ## Important (2017/10/24)
-It seems that there was an update on ICPC Live Archive platform, since our
+It seems that there was an update on ICPC Live Archive, since our
 submissions are now accepted. But sadly, a lot of our programs written in C are
 not accepted because of compilation errors (They did not activate C11 support
-for the compiler). So we will give all solutions for South Africa contest in
+for the compiler). So we will give solutions for South Africa contest in
 C++ and Python. But for West Africa contests, we will give solutions in C when
 it is possible.
 
