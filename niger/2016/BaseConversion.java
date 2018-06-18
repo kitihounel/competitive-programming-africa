@@ -20,8 +20,7 @@ import static java.lang.System.out;
 
 public class BaseConversion {
 
-    public static String digits = 
-            "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    public static String digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
     public static void main(String[] args) {
         int t;
@@ -88,14 +87,11 @@ public class BaseConversion {
      */
     public static int getDigit(char ch) {
         if (Character.isDigit(ch)) {
-            return Character.getNumericValue(ch)
-                    - Character.getNumericValue('0');
+            return Character.getNumericValue(ch) - Character.getNumericValue('0');
         } else if (Character.isUpperCase(ch)) {
-            return Character.getNumericValue(ch) + 10
-                    - Character.getNumericValue('A');
+            return Character.getNumericValue(ch) + 10 - Character.getNumericValue('A');
         } else {
-            return Character.getNumericValue(ch) + 36
-                    - Character.getNumericValue('a');
+            return Character.getNumericValue(ch) + 36 - Character.getNumericValue('a');
         }
     }
 

@@ -1,4 +1,4 @@
-/*
+/**
  * ACM2006 Greater NY Region C++ Solution to F - Visible Points
  *
  * Fred Pickel

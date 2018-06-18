@@ -1,7 +1,7 @@
-﻿/*
+﻿/**
  * The solution implemented here is not the best. It would be better to use
  * a stack to evaluate the expression. Maybe you should implement your own
- * solution. It will be a good exercise :)
+ * solution. It will be a good exercise.
  *
  * Explaination.
  * We parse the equation one token at a time, starting from the left.

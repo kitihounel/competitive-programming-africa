@@ -1,7 +1,3 @@
-/**
- * I don't know how to explain how I solved this problem.
- * So explaination will come later.
- */
 #include <iostream>
 #include <vector>
 #include <numeric>
