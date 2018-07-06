@@ -1,1 +1,1 @@
-ICPC Angola web site: https://icpcangola.wordpress.com/
+ICPC Angola website: https://icpcangola.wordpress.com/
