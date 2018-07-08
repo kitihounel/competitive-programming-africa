@@ -10,8 +10,8 @@
  *    (3) Then, again try to find the MST in O(E) (In this we have excluded an edge).
  *    (4) Do this for all the edges in MST, and take the best of all.
  *
- * Note that we don’t need to sort the edges again in point (3). So, the overalltTime
- * taken will be O(E log V + E + VE) = O(VE).
+ * Note that we don’t need to sort the edges again in point (3). So, the overall time
+ * taken will be O(E log E + VE).
  */
 #include <iostream>
 #include <cstdio>
