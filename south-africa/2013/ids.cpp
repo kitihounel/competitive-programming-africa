@@ -16,21 +16,25 @@ int main()
     string name, surname, id;
     map<string, int> counter;
 
-    while(cin >> name >> surname) {
+    while (cin >> name >> surname) {
 
         for (const auto &ch: surname) {
-            if (!isvowel(ch))
+            if (!isvowel(ch)) {
                 id.push_back(ch);
-            if (id.length() == 4ul)
+            }
+            if (id.length() == 4ul) {
                 break;
+            }
         }
         id.append(4ul - id.length(), 'Z');
 
         for (const auto &ch: name) {
-            if (isvowel(ch))
+            if (isvowel(ch)) {
                 id.push_back(ch);
-            if (id.length() == 6ul)
+            }
+            if (id.length() == 6ul) {
                 break;
+            }
         }
         id.append(6ul - id.length(), 'Z');
 
@@ -41,3 +45,4 @@ int main()
 
     return 0;
 }
+

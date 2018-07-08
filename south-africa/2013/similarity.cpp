@@ -59,8 +59,9 @@ int main()
 {
     string src, dst;
 
-    while (cin >> src >> dst)
+    while (cin >> src >> dst) {
         cout << editDistance(src, dst) << endl;
+    }
 
     return 0;
 }
