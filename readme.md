@@ -1,4 +1,4 @@
-# competitive-programming
+# competitive-programming-africa
 Solutions of problems from ICPC regionals, mainly West Africa national contests
 and South Africa regional.
 
