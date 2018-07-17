@@ -20,7 +20,7 @@ int main()
             sum += number[i] - '0';
         }
         m = sum % 9;
-        root = (m == 0? 9 : m);
+        root = (m == 0 ? 9 : m);
         printf("%d\n", root);
     }
 
