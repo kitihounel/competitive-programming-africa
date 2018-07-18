@@ -14,7 +14,7 @@
  * An improvement can be made at step 7. Instead of decreasing the values by 1, we can
  * decrease them by the value at 3rd position in A, i.e. A[2].
  *
- * Another variant of the algorithm, inspired by the official solution is given in the
+ * Another variant of the algorithm (which we don't recommend to use), is given in the
  * file fingerpainting.alt.c.
  *
  * Note:

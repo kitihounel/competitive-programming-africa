@@ -1,3 +1,8 @@
+/**
+ * This program pass all test cases.
+ * But it should not be trusted,  we don't understand why it works.
+ * Note: the official solution uses a method similar to the one used here.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 
