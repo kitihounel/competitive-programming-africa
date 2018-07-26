@@ -1,9 +1,9 @@
 /**
  * This problem is not solved yet, but you should read what follows.
  * We thought that the problem is about Alcuin's sequence, but it is not.
- * But at least we learnt something. For a given number N, the Nth number
- * in Alcuin's sequence give the number of triangles with integer sides and
- * perimeter N.
+ * For a given number N, the Nth number in Alcuin's sequence give the number
+ * of triangles with integer sides and perimeter N.
+ *
  * For more information about Alcuin's sequence:
  *  - Alcuin's sequence on the On-line Encyclopedia of Integer Sequences (OEIS):
  *    https://oeis.org/A005044
@@ -11,6 +11,9 @@
  *    https://catmentor.wordpress.com/2015/01/06/no-of-triangles-when-perimeter-is-mentioned/
  *  - A discussion on Quora for the brute force algorithm:
  *    https://www.quora.com/How-do-you-find-a-total-list-of-all-triangles-with-a-given-perimeter-integer-side-lengths-by-hand
+ *
+ * You can also read this thread on SO:
+ * https://stackoverflow.com/questions/19835174/how-to-check-if-3-sides-form-a-triangle-in-c
  */
 #include <stdio.h>
 #include <math.h>
