@@ -1,5 +1,8 @@
 /**
  * This program does not give accepted results.
+ * http://maratona.ime.usp.br/hist/2002/
+ * https://www.urionlinejudge.com.br/judge/en/problems/view/1339
+ * https://github.com/lucassf/UVA-Solutions
  */
 #include <iostream>
 #include <vector>
@@ -42,8 +45,8 @@ struct Face {
             for (int j = 0; j < FACE_SIZE; ++j) {
                 cout << content[i][j] << " ";
             }
+            cout << endl;
         }
-        cout << endl;
     }
 
     bool hasOneColor() {
@@ -57,7 +60,7 @@ struct Face {
         return true;
     }
 
-    char &operator()(const int &i, const int &j) {
+    char & operator ()(const int &i, const int &j) {
         return content[i][j];
     }
 
@@ -148,7 +151,7 @@ struct Face {
         bottom.setContent(rightContent);
         
         left.setContent(bottomContent);
-        
+
         reverse(leftContent.begin(), leftContent.end());
         top.setContent(leftContent);
     }
@@ -204,16 +207,25 @@ Side::Side(Face *f, const char *s, int i): face(f), type(s) {
 
 vector<char> Side::getContent() {
     vector<char> v;
-    for (int j = 0; j < FACE_SIZE; ++j) {
-        auto ch = (*face)(type == "row" ? index : j, type == "row" ? j : index);
-        v.push_back(ch);
+    if (type == "row") {
+        for (int j = 0; j < FACE_SIZE; ++j) {
+            v.push_back((*face)(index, j));
+        }
+    } else {
+        for (int j = 0; j < FACE_SIZE; ++j) {
+            v.push_back((*face)(j, index));
+        }
     }
     return v;
 }
 
 void Side::setContent(const vector<char> &v) {
     for (int j = 0; j < FACE_SIZE; ++j) {
-        (*face)(type == "row" ? index : j, type == "row" ? j : index) = v[j];
+        if (type == "row") {
+            (*face)(index, j) = v[j];
+        } else {
+            (*face)(j, index) = v[j];
+        }
     }
 }
 
