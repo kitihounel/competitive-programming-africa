@@ -1,8 +1,11 @@
 /**
- * This program does not give accepted results.
- * http://maratona.ime.usp.br/hist/2002/
- * https://www.urionlinejudge.com.br/judge/en/problems/view/1339
- * https://github.com/lucassf/UVA-Solutions
+ * This program is not really easy to read. Sorry for that.
+ * But you should read doc about rubik cube and try to implement your own solution.
+ * It is funny.
+ *
+ * The contest the program originated from: http://maratona.ime.usp.br/hist/2002/
+ * You can submit solutions here: https://www.urionlinejudge.com.br/judge/en/problems/view/1339
+ * Another solution can be found here: https://github.com/lucassf/UVA-Solutions
  */
 #include <iostream>
 #include <vector>
@@ -12,7 +15,7 @@
 
 using namespace std;
 
-const int FACE_SIZE = 3;
+const int faceSize = 3;
 
 struct Face;
 
@@ -27,67 +30,46 @@ struct Side {
 };
 
 struct Face {
-    char content[FACE_SIZE][FACE_SIZE];
+    vector<char> content;
     Side top, left, bottom, right;
 
-    Face(): top(), left(), bottom(), right() {}
+    Face(): content(faceSize * faceSize, 0), top(), left(), bottom(), right() {}
 
-    void readFromStdin() {
-        for (int i = 0; i < FACE_SIZE; ++i) {
-            for (int j = 0; j < FACE_SIZE; ++j) {
-                cin >> content[i][j];
-            }
-        }
-    }
-
-    void print() {
-        for (int i = 0; i < FACE_SIZE; ++i) {
-            for (int j = 0; j < FACE_SIZE; ++j) {
-                cout << content[i][j] << " ";
-            }
-            cout << endl;
-        }
+    char & operator ()(const int &i, const int &j) {
+        return content.at(i * faceSize + j);
     }
 
     bool hasOneColor() {
-        for (int i = 0; i < FACE_SIZE; ++i) {
-            for (int j = 0; j < FACE_SIZE; ++j) {
-                if (content[i][j] != content[0][0]) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    char & operator ()(const int &i, const int &j) {
-        return content[i][j];
+        auto ref = (*this)(0, 0);
+        return all_of(content.begin(), content.end(), [&ref](const char &ch) -> bool {
+            return ch == ref;
+        });
     }
 
     void setColumn(int col, const vector<char> &v) {
-        for (int j = 0; j < FACE_SIZE; ++j) {
-            content[j][col] = v[j];
+        for (int j = 0; j < faceSize; ++j) {
+            (*this)(j, col) = v.at(j);
         }
     }
 
     vector<char> getColumn(int col) {
         vector<char> v;
-        for (int j = 0; j < FACE_SIZE; ++j) {
-             v.push_back(content[j][col]);
+        for (int j = 0; j < faceSize; ++j) {
+             v.push_back((*this)(j, col));
         }
         return v;
     }
 
     void setRow(int row, const vector<char> &v) {
-        for (int j = 0; j < FACE_SIZE; ++j) {
-            content[row][j] = v[j];
+        for (int j = 0; j < faceSize; ++j) {
+            (*this)(row, j) = v.at(j);
         }
     }
 
     vector<char> getRow(int row) {
         vector<char> v;
-        for (int j = 0; j < FACE_SIZE; ++j) {
-             v.push_back(content[row][j]);
+        for (int j = 0; j < faceSize; ++j) {
+             v.push_back((*this)(row, j));
         }
         return v;
     }
@@ -101,11 +83,11 @@ struct Face {
     }
 
     vector<char> getRightColumn() {
-        return getColumn(FACE_SIZE - 1);
+        return getColumn(faceSize - 1);
     }
 
     void setRightColumn(const vector<char> &v) {
-        setColumn(FACE_SIZE - 1, v);
+        setColumn(faceSize - 1, v);
     }
 
     vector<char> getTopRow() {
@@ -117,82 +99,26 @@ struct Face {
     }
 
     vector<char> getBottomRow() {
-        return getRow(FACE_SIZE - 1);
+        return getRow(faceSize - 1);
     }
 
     void setBottomRow(const vector<char> &v) {
-        setRow(FACE_SIZE - 1, v);
+        setRow(faceSize - 1, v);
     }
 
-    void rotateCw() {
-        auto rightColumn = getRightColumn();
-        auto leftColumn = getLeftColumn();
-        auto bottomRow = getBottomRow();
-        auto topRow = getTopRow();
+    void rotateContentCw() {
+        auto right = getRightColumn();
+        auto left = getLeftColumn();
+        auto bottom = getBottomRow();
+        auto top = getTopRow();
 
-        setRightColumn(topRow);
-
-        reverse(rightColumn.begin(), rightColumn.end());
-        setBottomRow(rightColumn);
-        
-        setLeftColumn(bottomRow);
-
-        reverse(leftColumn.begin(), leftColumn.end());
-        setTopRow(leftColumn);
-
-        auto topContent = top.getContent();
-        auto bottomContent = bottom.getContent();
-        auto leftContent = left.getContent();
-        auto rightContent = right.getContent();
-
-        right.setContent(topContent);
-
-        reverse(rightContent.begin(), rightContent.end());
-        bottom.setContent(rightContent);
-        
-        left.setContent(bottomContent);
-
-        reverse(leftContent.begin(), leftContent.end());
-        top.setContent(leftContent);
+        setRightColumn(top);
+        reverse(right.begin(), right.end());
+        setBottomRow(right);
+        setLeftColumn(bottom);
+        reverse(left.begin(), left.end());
+        setTopRow(left);
     }
-
-    void rotateCcw() {
-        for (int j = 0; j < 3; ++j) {
-            rotateCw();
-        }
-    }
-
-    // void rotateCcw() {
-    //     auto rightColumn = getRightColumn();
-    //     auto leftColumn = getLeftColumn();
-    //     auto bottomRow = getBottomRow();
-    //     auto topRow = getTopRow();
-
-    //     reverse(topRow.begin(), topRow.end());
-    //     setLeftColumn(topRow);
-
-    //     setBottomRow(leftColumn);
-
-    //     reverse(bottomRow.begin(), bottomRow.end());
-    //     setRightColumn(bottomRow);
-
-    //     setTopRow(rightColumn);
-
-    //     auto topContent = top.getContent();
-    //     auto bottomContent = bottom.getContent();
-    //     auto leftContent = left.getContent();
-    //     auto rightContent = right.getContent();
-
-    //     reverse(topContent.begin(), topContent.end());
-    //     left.setContent(topContent);
-
-    //     bottom.setContent(leftContent);
-
-    //     reverse(bottomContent.begin(), bottomContent.end());
-    //     right.setContent(bottomContent);
-
-    //     top.setContent(rightContent);
-    // }
 };
 
 using Face = struct Face;
@@ -208,11 +134,11 @@ Side::Side(Face *f, const char *s, int i): face(f), type(s) {
 vector<char> Side::getContent() {
     vector<char> v;
     if (type == "row") {
-        for (int j = 0; j < FACE_SIZE; ++j) {
+        for (int j = 0; j < faceSize; ++j) {
             v.push_back((*face)(index, j));
         }
     } else {
-        for (int j = 0; j < FACE_SIZE; ++j) {
+        for (int j = 0; j < faceSize; ++j) {
             v.push_back((*face)(j, index));
         }
     }
@@ -220,20 +146,82 @@ vector<char> Side::getContent() {
 }
 
 void Side::setContent(const vector<char> &v) {
-    for (int j = 0; j < FACE_SIZE; ++j) {
+    for (int j = 0; j < faceSize; ++j) {
         if (type == "row") {
-            (*face)(index, j) = v[j];
+            (*face)(index, j) = v.at(j);
         } else {
-            (*face)(j, index) = v[j];
+            (*face)(j, index) = v.at(j);
         }
     }
 }
 
 Face faces[6];
 
+void rotateFaceCw(int number) {
+    auto &face = faces[number];
+    auto top = face.top.getContent();
+    auto bottom = face.bottom.getContent();
+    auto left = face.left.getContent();
+    auto right = face.right.getContent();
+
+    face.rotateContentCw();
+    switch (abs(number)) {
+    case 0:
+        face.right.setContent(top);
+        face.bottom.setContent(right);
+        reverse(bottom.begin(), bottom.end());
+        face.left.setContent(bottom);
+        reverse(left.begin(), left.end());
+        face.top.setContent(left);
+        break;
+    case 1:
+        face.right.setContent(top);
+        reverse(right.begin(), right.end());
+        face.bottom.setContent(right);
+        face.left.setContent(bottom);
+        reverse(left.begin(), left.end());
+        face.top.setContent(left);
+        break;
+    case 2:
+        reverse(top.begin(), top.end());
+        face.right.setContent(top);
+        reverse(right.begin(), right.end());
+        face.bottom.setContent(right);
+        face.left.setContent(bottom);
+        face.top.setContent(left);
+        break;
+    case 3:
+        reverse(top.begin(), top.end());
+        face.right.setContent(top);
+        face.bottom.setContent(right);
+        reverse(bottom.begin(), bottom.end());
+        face.left.setContent(bottom);
+        face.top.setContent(left);
+        break;
+    case 4:
+        face.right.setContent(top);
+        face.bottom.setContent(right);
+        face.left.setContent(bottom);
+        face.top.setContent(left);
+        break;
+    case 5:
+        face.right.setContent(top);
+        face.bottom.setContent(right);
+        face.left.setContent(bottom);
+        face.top.setContent(left);
+        break;
+    }
+}
+
+void rotateFaceCcw(int number) {
+    for (int j = 0; j < 3; ++j) {
+        rotateFaceCw(number);
+    }
+}
+
 void initFaces()
 {
-    int lastIndex = FACE_SIZE - 1;
+    int lastIndex = faceSize - 1;
 
     faces[0].top = Side(faces + 4, "column", 0);
     faces[0].right = Side(faces + 1, "column", 0);
@@ -268,35 +256,43 @@ void initFaces()
 
 void readTestData()
 {
-    for (int j = 0; j < 3; ++j) {
-            cin >> faces[4](j, 0) >> faces[4](j, 1) >> faces[4](j, 2);
-    }
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 4; ++j) {
-            cin >> faces[j](i, 0) >> faces[j](i, 1) >> faces[j](i, 2);
+    for (int i = 0; i < faceSize; ++i) {
+        for (int j = 0; j < faceSize; ++j) {
+            cin >> faces[4](i, j);
         }
     }
-    for (int j = 0; j < 3; ++j) {
-        cin >> faces[5](j, 0) >> faces[5](j, 1) >> faces[5](j, 2);
+
+    for (int i = 0; i < faceSize; ++i) {
+        for (int f = 0; f < 4; ++f) {
+            for (int j = 0; j < faceSize; ++j) {
+                cin >> faces[f](i, j);
+            }
+        }
+    }
+
+    for (int i = 0; i < faceSize; ++i) {
+        for (int j = 0; j < faceSize; ++j) {
+            cin >> faces[5](i, j);
+        }
     }
 }
-
-#define DEBUG 1
 
 int main()
 {
     int t, r;
 
     initFaces();
+
     cin >> t;
     while (t > 0) {
         readTestData();
+
         cin >> r;
         while (r != 0) {
             if (r > 0) {
-                faces[r-1].rotateCw();
+                rotateFaceCw(r - 1);
             } else {
-                faces[abs(r)-1].rotateCcw();
+                rotateFaceCcw(abs(r) - 1);
             }
             cin >> r;
         }
@@ -305,14 +301,7 @@ int main()
             return f.hasOneColor();
         });
 
-#ifdef DEBUG
-        for (int j = 0; j < 6; ++j) {
-            faces[j].print();
-        }
-#endif
-
         cout << (b ? "YES" : "NO") << endl;
-
         --t;
     }
 
