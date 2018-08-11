@@ -1,5 +1,7 @@
 /**
- * Not solved yet.
+ * This solution does not work.
+ * We will try to fix it later (or remove this file).
+ * Use the solution provided by the judges: 'cylinders.official.c'.
  */
 #include <iostream>
 #include <cstdio>
@@ -38,55 +40,34 @@ double slope(const Point &p, const Point &q)
     return (p.y - q.y) / (p.x - q.x);
 }
 
-// Point nextUp(const Point &p, const Point &q) {
-//     auto d = center(p, q);
-//     auto a = (q.y - p.y) / (q.x - p.x);
-//     auto b = -1.0;
-//     auto c = p.y - a * p.x;
-
-//     auto x = (d.x * (a * a + b * b) + b * (a * d.y + d.x) + a * c) / (b + b * b);
-//     auto y = (x - d.x) * (q.x - p.x) / (p.y - q.y) + d.y;
-
-//     cout << "computed" << " " << x << " " << y << endl;
-
-//     return Point(x, y);
-// }
-
-// Point nextUp(const Point &p, const Point &q) {
-//     auto a = slope(p, q);
-//     auto d = distance(p, q);
-//     auto h = sqrt(4.0 * radius * radius - (d * d / 4.0));
-//     auto b = p.y - a * p.x;
-
-//     auto k = b + h * sqrt(1 + a * a);
-//     auto x = (p.x + q.x) / 2.0;
-
-//     return Point(x, a * x + k);
-// }
-
-Point upline(const Point &p, const Point &q) {
+Point nextUpV2(const Point &p, const Point &q) {
     auto a = slope(p, q);
-    auto b = p.y - a * p.x;
     auto d = distance(p, q);
     auto h = sqrt(4.0 * radius * radius - (d * d / 4.0));
+    auto b = p.y - a * p.x;
 
-    return Point(a, b + h * sqrt(1 + a * a));
+    auto k = b + h * sqrt(1 + a * a);
+    auto x = (p.x + q.x) / 2.0;
+
+    return Point(x, a * x + k);
 }
 
 Point nextUp(const Point &p, const Point &q) {
-    auto c = center(p, q);
-    auto line = upline(p, q);
+    auto xd  = (p.x + q.x) / 2.0;
+    auto yd  = (p.y + q.y) / 2.0;
 
-    auto a0 = line.x, b0 = -1.0, c0 = line.y;
-    auto a = -1.0 / a0;
-    auto b = c.y - a * c.x;
-    auto a1 = a, b1 = -1.0, c1 = b;
+    auto a1 = (p.y - q.y) / (p.x - q.x);
+    auto b1 = p.y - a1 * p.x;
+    auto a2 = -1.0 / a1;
+    auto b2 = yd - a2 * xd;
 
-    auto d = a0 * b1 - a1 * b0;
-    auto x = (b1 * c0 - b0 * c1) / d;
-    auto y = (a0 * c1 + a1 * c0) / d;
+    auto xu = q.x - p.x;
+    auto yu = q.y - p.y;
 
-    return Point(x, y);
+    auto xc = ((xu * xd) + yu * (yd - b2)) / (xu + yu * a2);
+    auto yc = a2 * xc + b2;
+
+    return Point(xc, yc);
 }
 
 Point top(vector<Point> centers) {
@@ -99,14 +80,13 @@ Point top(vector<Point> centers) {
             if (fabs(i->y - j->y) < eps) {
                 auto d = distance(*i, *j);
                 auto h = sqrt(4.0 * radius * radius - (d * d / 4.0));
-                tmp.emplace_back((i->x + j->x) / 2.0, i->y + h);
+                tmp.emplace_back((i->x + j->x) / 2.0, (i->y + j->y) / 2.0 + h);
             } else {
                 tmp.push_back(nextUp(*i, *j));
             }
             ++i;
             ++j;
         }
-
         centers = tmp;
     }
     
