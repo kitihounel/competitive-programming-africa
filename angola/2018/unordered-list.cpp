@@ -1,5 +1,6 @@
 /**
  * This problem can be solved with a segment tree.
+ * https://algo.is/t-414-aflv-competitive-programming-course-2016/, SLIDES 3 about data structures.
  */
 #include <cstdio>
 #include <vector>
@@ -77,7 +78,8 @@ int main()
         update(root, k, counters[k]);
     }
 
-    for (const auto q: queries) printf("%d ", q);
+    for (const auto q: queries)
+        printf("%d ", q);
     printf("\n");
 
     delete root;

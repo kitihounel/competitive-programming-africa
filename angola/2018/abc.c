@@ -1,3 +1,6 @@
+/**
+ * The ASCII code of 'A' is 65. :)
+ */
 #include <stdio.h>
 #include <stdlib.h>
 

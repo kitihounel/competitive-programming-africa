@@ -1,3 +1,11 @@
+/**
+ * Generate all permutations of the computers and compute for each permutation
+ * the length of cable needed to connect adjacent computers.
+ * The answer is the minimum of the permutations.
+ * Complexity: O(N!)
+ * There is at most 10 computers, so in the hardest case, we (only) need to perform
+ * 10! = 3628800 calls to next_permutation().
+ */
 #include <cstdio>
 #include <utility>
 #include <vector>

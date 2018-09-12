@@ -1,3 +1,6 @@
+/**
+ * Binary search.
+ */
 #include <cstdio>
 #include <vector>
 #include <algorithm>
