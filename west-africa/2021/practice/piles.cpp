@@ -1,7 +1,5 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
-#include <iterator>
 
 using namespace std;
 
@@ -22,7 +20,6 @@ int main()
         for (int i = 0; i < n; ++i) {
             cin >> a[i];
         }
-        sort(begin(a), end(a));
 
         bool possible = true;
 
@@ -32,10 +29,9 @@ int main()
             }
             
             int d = v[i-1] - v[i] + 1;
-            auto it = lower_bound(begin(a), end(a), d);
 
-            if (it != end(a)) {
-                v[i-1] -= *it;
+            if (d <= a[i-1]) {
+                v[i-1] -= d;
                 if (v[i-1] < 1) {
                     possible = false;
                     break;
