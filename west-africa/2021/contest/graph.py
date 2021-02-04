@@ -66,7 +66,7 @@ def find_brigdes():
     global neighbors
 
     bridges = set()
-    # Since the graph is connected, we can run only ons DFS.
+    # Since the graph is connected, we can run only one DFS.
     visit(1, set(), {}, {}, {}, bridges)
     return bridges
 
