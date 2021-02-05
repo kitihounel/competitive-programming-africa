@@ -31,6 +31,10 @@ class UnionFind:
             r, d = (x, y) if self.weights[x] > self.weights[y] else (y, x)
             self.weights[r] += self.weights[d]
             self.parents[d] = r
+            root = r
+        else:
+            root = x
+        return root
 
     def union_all(self, *objects):
         roots = [self[x] for x in objects]
@@ -39,14 +43,35 @@ class UnionFind:
             if r != heaviest:
                 self.weights[heaviest] += self.weights[r]
                 self.parents[r] = heaviest
+        return heaviest
 
-time = 0
+def find_spanning_tree(edges):
+    ds = UnionFind()
+    tree = []
+    for e in edges:
+        u, v, _ = e
+        p, q = ds[u], ds[v]
+        if p != q:
+            ds.union(p, q)
+            tree.append(e)
+    return tree
+
+def split_tree(tree, bridge):
+    ds = UnionFind()
+    costs = defaultdict(int)
+    for edge in filter(lambda edge: edge[0:2] != bridge, tree):
+        u, v, w = edge
+        p, q = ds[u], ds[v]
+        if p != q:
+            s = costs[p] + costs[q]
+            r = ds.union(p, q)
+            costs[r] = s + w
+    return ds, costs
 
 def visit(u, visited, parents, disc, low, bridges):
     global time, neighbors
-
     visited.add(u)
-    disc[u] = time
+    disc[u] = time # pylint: disable=used-before-assignment
     low[u] = time
     time += 1
     for v in neighbors[u]:
@@ -63,60 +88,42 @@ def visit(u, visited, parents, disc, low, bridges):
             pass
 
 def find_brigdes():
-    global neighbors
-
     bridges = set()
     # Since the graph is connected, we can run only one DFS.
     visit(1, set(), {}, {}, {}, bridges)
     return bridges
 
-N, M = (int(token) for token  in input().split(maxsplit=1))
+
+N, M = (int(token) for token in input().split(maxsplit=1))
 neighbors = defaultdict(list)
 edges = []
 for _ in range(M):
-    u, v, w = (int(token) for token  in input().split(maxsplit=2))
+    u, v, w = (int(token) for token in input().split(maxsplit=2))
     neighbors[u].append(v)
     neighbors[v].append(u)
     e = (min(u, v), max(u, v), w)
     edges.append(e)
 
+time = 0
 bridges = find_brigdes()
 if len(bridges) == 0:
     print(-1)
     exit()
 
 edges.sort(key=itemgetter(2))
+min_span_tree = find_spanning_tree(edges)
+max_span_tree = find_spanning_tree(reversed(edges))
 min_diff = 10 ** 16
-for b in bridges:
-    # Min spanning trees construction.
-    min_ds = UnionFind()
-    min_tree_costs = defaultdict(int)
-    for u, v, w in edges:
-        if (u, v) == b:
-            continue
-        p, q = min_ds[u], min_ds[v]
-        if p != q:
-            s = min_tree_costs[p] + min_tree_costs[q]
-            min_ds.union(p, q)
-            min_tree_costs[min_ds[p]] = s + w
-
-    # Max spanning trees construction.
-    max_ds = UnionFind()
-    max_tree_costs = defaultdict(int)
-    for u, v, w in reversed(edges):
-        if (u, v) == b:
-            continue
-        p, q = max_ds[u], max_ds[v]
-        if p != q:
-            s = max_tree_costs[p] + max_tree_costs[q]
-            max_ds.union(p, q)
-            max_tree_costs[max_ds[p]] = s + w
-
-    u, v = b
+for bridge in bridges:
+    # Min and max spanning trees of each connected component.
+    min_ds, min_costs = split_tree(min_span_tree, bridge)
+    max_ds, max_costs = split_tree(max_span_tree, bridge)
+    # Compute difference between costs and update the overall difference.
+    u, v = bridge
     min_diff = min([
         min_diff,
-        abs(min_tree_costs[min_ds[u]] - max_tree_costs[max_ds[v]]),
-        abs(min_tree_costs[min_ds[v]] - max_tree_costs[max_ds[u]])
+        abs(min_costs[min_ds[u]] - max_costs[max_ds[v]]),
+        abs(min_costs[min_ds[v]] - max_costs[max_ds[u]])
     ])
 
 print(min_diff)
