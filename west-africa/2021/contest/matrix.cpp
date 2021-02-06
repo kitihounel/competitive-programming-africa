@@ -8,21 +8,23 @@ typedef struct Point {
     int i, j;
 } Point;
 
-int check(const vector<vector<int>> &m, const int x, const Point &p)
+int check(const vector<vector<int>> &m, const int x, const Point &g)
 {
-    int b = 1;
+    int ok = 1;
 
-    for (int i = p.i; i < p.i + x && b; ++i) {
-        for (int j = p.j; j < p.j + x && b; ++j) {
-            auto ri = i - p.i;
-            auto rj = j - p.j;
-            auto ti = rj;
-            auto tj = x - ri - 1;
-            b = m[i][j] == m[ti + p.i][tj + p.j];
+    for (int i = g.i; i < g.i + x && ok; ++i) {
+        for (int j = g.j; j < g.j + x && ok; ++j) {
+            auto si = i - g.i;
+            auto sj = j - g.j;
+
+            auto b = si;
+            auto a = x - sj - 1;
+
+            ok = m[i][j] == m[a + g.i][b + g.j];
         }
     }
 
-    return b;
+    return ok;
 }
 
 int main()
