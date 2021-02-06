@@ -8,7 +8,7 @@ typedef struct Point {
     int i, j;
 } Point;
 
-int check(const vector<vector<int>> m, int x, const Point &p)
+int check(const vector<vector<int>> &m, const int x, const Point &p)
 {
     int b = 1;
 
