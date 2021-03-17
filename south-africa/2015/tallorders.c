@@ -6,11 +6,8 @@
  * contained in the file 'article.pdf'. We advice to read the article before
  * looking in the code below.
  */
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-
-using namespace std;
+#include <stdio.h>
+#include <math.h>
 
 /*
  * This function computes the value of the catenary parameter 'a', given 'p'
@@ -40,10 +37,10 @@ int main()
     long double d, p;
     long double a, l;
 
-    while (cin >> p >> d) {
+    while (scanf("%Lf %Lf\n", &p, &d) == 2) {
         a = findCatenaryConstant(d, p);
         l = 2.0L * a * sinhl(d / (2.0L * a));
-        cout << fixed << setprecision(3) << l - fmodl(l, 0.001L) << endl;
+        printf("%.3Lf\n", l - fmodl(l, 0.001L));
     }
 
     return 0;
