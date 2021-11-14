@@ -4,8 +4,7 @@
 from math import factorial
 
 n = int(input())
-while n > 0:
+for _ in range(n):
     x = int(input())
     s = str(factorial(x))
-    print( str().join( sorted(s) ).lstrip("0") )
-    n = n - 1
+    print(''.join(sorted(s)).lstrip("0"))
