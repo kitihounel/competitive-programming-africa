@@ -2,12 +2,7 @@ from collections import Counter
 
 t = int(input())
 for _ in range(t):
-    s = input()
-    a = [int(ch) for ch in s]
+    a = [int(ch) for ch in input()]
     c = Counter(a)
-    self_describing = True
-    for i, d in enumerate(a):
-        if c[i] != d:
-            self_describing = False
-            break
-    print("{}self-describing".format("not " if not self_describing else ""))
+    self_describing = all(c[i] == d for i, d in enumerate(a))
+    print('{}self-describing'.format('not ' if not self_describing else ''))
