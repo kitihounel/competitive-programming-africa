@@ -2,8 +2,9 @@ def solve(s):
     count, start, seen = 0, 0, {}
     for i, ch in enumerate(s):
         if ch in seen and seen[ch] >= start:
-            n = seen[ch] - start + 1
-            count += (n * i) - (n * start) - (n * (n - 1) // 2)
+            n = i - start
+            k = seen[ch] - start
+            count += n * (k + 1) - k * (k + 1) // 2
             start = seen[ch] + 1
         seen[ch] = i
     n = len(s) - start
