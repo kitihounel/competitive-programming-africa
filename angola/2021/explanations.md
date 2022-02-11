@@ -6,6 +6,7 @@
 - [Problem E](#problem-e-yassers-permutation)
 - [Problem F](#problem-f-strings-wings)
 - [Problem L](#problem-l-divisibility-by-two)
+
 ## Problem A: Look Carefully
 
 Very hard problem... :)
@@ -48,15 +49,61 @@ The answer to the problem will be $|S|$ + $|T|$ - $|U|$.
 
 ## Problem G: Parallel Universe
 
-Disclaimer: we can't guarantee than the solution we provide for this problem is correct since we did not
-have secret judge inputs.
+**Disclaimer**: we can't guarantee that our solution is correct since we did not test it with judge inputs
+(we did not have them).
+
+Given an array of length $N$ that contains $K (K \leq 20)$ differents integers, we should group similar values together using the minimum number of adjacent swaps. Sorting the array is not the best solution, since it will
+not always yield to the minimum number of swaps. For example, with the array $[3, 3, 1, 1, 2, 1, 2, 2]$, the
+best solution is to just swap the fifth and sixth elements. Sorting the array will involve more swaps.
+
+Our solution uses a greedy algorithm that runs in $K-1$ steps. At each step, we compute for each integer in the
+array the number of swaps needed to move all its occurrences at the beginning of the array. Then we chose the one
+with the minimum cost and move all its occurrences at the beginning of the array and we restart the process with
+the remaining array.
+
+Let's explain the process with the following example: $A = [1, 2, 4, 3, 1, 1, 2, 4, 3, 5]$. We will need $4$ steps.
+
+### Step 1
+  - Number of swaps needed to move all $1s$ at the begining: $6$
+  - Number of swaps needed to move all $2s$: $6$
+  - Number of swaps needed to move all $3s$: $10$
+  - Number of swaps needed to move all $4s$: $8$
+  - Number of swaps needed to move all $5s$: $9$
+
+The best choice is to move all $2s$ with $6$ swaps. The resulting array is $[2, 2, 1, 4, 3, 1, 1, 4, 3, 5]$.
+
+### Step 2
+  - Number of swaps needed to move all $1s$: $4$
+  - Number of swaps needed to move all $4s$: $5$
+  - Number of swaps needed to move all $3s$: $7$
+  - Number of swaps needed to move all $5s$: $7$
+
+The best choice is to move all $1s$ with $4$ swaps. The resulting array is $[2, 2, 1, 1, 1, 4, 3, 4, 3, 5]$.
+
+### Step 3
+  - Number of swaps needed to move all $4s$: $1$
+  - Number of swaps needed to move all $3s$: $3$
+  - Number of swaps needed to move all $5s$: $4$
+
+The best choice is to move all $4s$ with one swap. The resulting array is $[2, 2, 1, 1, 1, 4, 4, 3, 3, 5]$.
+
+### Step 4
+  - Number of swaps needed to move all $3s$: $0$
+  - Number of swaps needed to move all $5s$: $2$
+
+Nothing to do at this step, the array won't change. And since we are at the fourth step, we are done.
+
+The process is over, and we need $11$ swaps to reach our goal. 
+
+**Note**: There is a similar problem to this one that asks to sort an array using the minimum number of adjacent
+swaps. The solution is to use merge sort and count the number of swaps in the merge step.
 
 ## Problem L: Divisibility by Two.
 
 This problem asks to find the greatest power of $2$ that is least or equal to a given number $N$.
 
-Let $B$ be the number of bits needed to represent $N$ in binary. The power of $2$ we are
-looking is then $2^{B-1}$.
+Let $B$ be the number of bits needed to represent $N$. The power of $2$ we are looking for is
+$2^{B-1}$.
 
-Note: in the code, we use a well-known trick to check if a positive number $N$ is a power
-of $2$. If $N$  is a power of $2$, then `(N & (N-1)) == 0` is true.
+Note: in the code, we check if $N$ is a power of two with a well-known trick. If $N$  is a power
+of $2$, then `(N & (N-1)) == 0` is true.
