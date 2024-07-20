@@ -12,3 +12,6 @@ explainations
 
 # Stupid VS Code Folder
 .vscode
+
+# System files
+.DS_Store
