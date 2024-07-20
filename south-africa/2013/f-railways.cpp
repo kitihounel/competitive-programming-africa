@@ -1,18 +1,3 @@
-/**
- * We have to find the second best minimum spanning tree of a given graph.
- * This solution is based on the explainations by Amandeep Singh on this page:
- *    https://www.quora.com/How-do-I-find-the-second-best-minimum-spanning-tree
- *
- * Description of the process
- *    (1) Sort the edges in O(E log E), then find MST using Kruskal algorithm in O(E).
- *    (2) Now, for each edge in MST (We will have V-1 edges in it) temporarily exclude
- *        it from the edge list so that it cannot be chosen.
- *    (3) Then, again try to find the MST in O(E) (In this we have excluded an edge).
- *    (4) Do this for all the edges in MST, and take the best of all.
- *
- * Note that we don’t need to sort the edges again in point (3). So, the overall time
- * taken will be O(E log E + VE).
- */
 #include <iostream>
 #include <cstdio>
 #include <vector>
@@ -85,9 +70,9 @@ int mst(int n, const VE &edges, VE *out = nullptr, const Edge *excluded = nullpt
         ++it;
     }
 
-    // It can happen that after we remove an edge, the graph is no more connected
+    // It can happen that after we removed an edge, the graph is no more connected
     // and we cannot buid a MST. See sample input -> test case 1 -> edge (2, 3).
-    // In that case, we return a very big value with cannot be a valid anwser.
+    // In that case, we return a very big value which cannot be a valid anwser.
     return (mstSize == n - 1 ? cost : 1000000000);
 }
 

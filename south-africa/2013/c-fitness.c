@@ -1,7 +1,3 @@
-/**
- * Number theory theorem: if a = b mod m, then m | (a - b).
- * We are looking for the greatest divisor of (a - b) which is less or equal to M. 
- */
 #include <stdio.h>
 
 int main()

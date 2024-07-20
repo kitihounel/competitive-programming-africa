@@ -1,14 +1,3 @@
-/**
- * This problem is about Levenshtein distance.
- *
- * You can find an introduction at:
- * https://en.wikipedia.org/wiki/Levenshtein_distance
- *
- * A very good explaination of the algorithm is given at:
- * http://blog.ce-se.de/2010/10/11/levenshtein-distance-edit-distance-easily-explained/
- *
- * This program is based on the algorithm given in the Wikipedia's article.
- */
 #include <iostream>
 #include <cctype>
 #include <algorithm>
